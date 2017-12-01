@@ -15,19 +15,24 @@ cd log
 touch mongo.log
 ```
 
-### 以管理员身份运行CMD
-``` bash
-mongod --dbpath "C:\Program Files\MongoDB\Server\3.4\data" --logpath "C:\Program Files\MongoDB\Server\3.4\log\mongo.log" --logappend 
+### 添加环境变量
+```bash
+C:\Program Files\MongoDB\Server\3.4\bin
 ```
 
-### 另启一个窗口
+### 以管理员身份运行CMD，并作为服务启动
+``` bash
+mongod --dbpath "C:\Program Files\MongoDB\Server\3.4\data" --logpath "C:\Program Files\MongoDB\Server\3.4\log\mongo.log" --logappend --install --serviceName "MongoDB"
+```
+
+### 测试
 ```bash
 	mongo
 ```
-
-### 作为服务启动
-``` bash
-mongod --dbpath "C:\Program Files\MongoDB\Server\3.4\data" --logpath "C:\Program Files\MongoDB\Server\3.4\log\mongo.log" --logappend --install --serviceName "MongoDB"
+---
+## 创建用户
+```bash
+db.createUser({user: 'copy',pwd: '123', roles:[{role:'dbOwner',db:'myblog'}]})
 ```
 ## 基础命令
 

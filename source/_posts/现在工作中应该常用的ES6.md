@@ -73,7 +73,7 @@ function add(a, b) {
 // ES6
 (a = 0, b = 1) => a + b
 ```
-注意点： a, b 两个参数，若a有默认值，而b没有，则b要在a之前
+注意点： 有默认值的参数，要放在没有默认值的参数之后
 
 ``` javascript
 (a = 0, b) => a + b // X
@@ -101,7 +101,34 @@ obj //{a: 1, b: 2, c: 3}
 ```
 注意点： assign()只能进行浅拷贝
 
-### 七、 promise
+### 七、扩展运算符（...）和 rest 参数
+1、扩展运算符
+``` javascript
+console.log(1, ...[2, 3, 4], 5)  
+// 1 2 3 4 5  
+
+// 常用在函数调用
+var args = [0, 1, 2]
+func(...args)
+
+// 将一个数组添加到另一个数组的尾部
+var arr1 = [0, 1, 2]  
+var arr2 = [3, 4, 5]  
+arr1.push(...arr2)
+```
+
+2、rest 参数
+```javascript
+ (a, b, ...theArgs) => {
+    // ...
+}
+
+```
+
+注意点： rest参数之后不能再有其它参数（即，只能是最后一个参数），否则会报错。
+
+
+### 八、 promise
 promise是为解决ES5回调函数在多重嵌套的时候出现的'回调地狱',金字塔形的代码不好阅读与维护。
 
 ``` javascript
@@ -151,7 +178,9 @@ Pro.then(a => {
 ```
 还有Promise.all()和Promise.race()
 
-### 八、Modules
+
+
+### 九、Modules
 在这里我们结合Commonjs对比这讲，
 1,基本使用方法
 ``` javascript
@@ -179,3 +208,32 @@ import es6 from 'es6.js'
 es6.add(1, 2) // 
 
 ```
+
+### 十、Class
+``` javascript
+class Person{  
+    // 构造  
+    constructor(x,y){  
+        this.x = x  
+        this.y = y
+    }  
+  
+    toString(){  
+        return (this.x + "的年龄是" +this.y+"岁")  
+    }  
+}  
+export {Person} 
+// constructor方法,是构造方法
+// this关键字则代表实例对象
+
+
+//index.js  
+import {Person} from './Person'
+let person = new Person('张三',12)  
+console.log(person.toString())
+```
+注意点：
+1、class可以看作只是一个语法糖,它的绝大部分功能,ES5都可以做到,
+新的class写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已。
+2、class不存在变量提升,需要先定义再使用
+
